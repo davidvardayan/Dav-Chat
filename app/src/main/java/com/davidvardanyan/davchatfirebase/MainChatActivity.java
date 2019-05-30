@@ -23,7 +23,7 @@ public class MainChatActivity extends AppCompatActivity {
 
 
 
-        // Link the Views in the layout to the Java code
+
         mInputText = (EditText) findViewById(R.id.messageInput);
         mSendButton = (ImageButton) findViewById(R.id.sendButton);
         mChatListView = (ListView) findViewById(R.id.chat_list_view);

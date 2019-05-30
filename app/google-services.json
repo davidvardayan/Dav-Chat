@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "52334460000",
+    "firebase_url": "https://dav-chat.firebaseio.com",
+    "project_id": "dav-chat",
+    "storage_bucket": "dav-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52334460000:android:e0855f39d0b084c0",
+        "android_client_info": {
+          "package_name": "com.davidvardanyan.davchatfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "52334460000-cqbi9435nd1rpnj310i8bppd9p3l5au7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxPLCBAXvrhj7auTUhF4Z_xrVC_KgMTp8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "52334460000-cqbi9435nd1rpnj310i8bppd9p3l5au7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
