@@ -1,6 +1,8 @@
 package com.davidvardanyan.davchatfirebase;
 
 import android.app.AlertDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -136,10 +138,25 @@ public class RegisterActivity extends AppCompatActivity {
                    if (!task.isSuccessful()){
                      Log.d("DavChat","User creation failed");
                      showErrorDialog("Registration attempt failed");
-                   }
+                   }  else {
+                       saveDisplayName();
+                       Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                       finish();
+                       startActivity(intent);
+                      }
                }
            });
+
         }
+
+
+        //Shared preferences
+        private void saveDisplayName(){
+           String displayName = mUsernameView.getText().toString();
+            SharedPreferences prefs = getSharedPreferences(CHAT_PREFS,0);
+            prefs.edit().putString(DISPLAY_NAME_KEY,displayName).apply();
+        }
+
 
         private void showErrorDialog(String message){
 
