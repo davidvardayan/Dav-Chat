@@ -1,14 +1,23 @@
 package com.davidvardanyan.davchatfirebase;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -24,6 +33,9 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText mPasswordView;
     private EditText mConfirmPasswordView;
 
+   //Firebase variables
+
+    private FirebaseAuth mAuth;
 
 
 
@@ -50,7 +62,9 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+              //    Instance of Firebase
 
+        mAuth = FirebaseAuth.getInstance();
 
     }
 
@@ -95,7 +109,7 @@ public class RegisterActivity extends AppCompatActivity {
             focusView.requestFocus();
         } else {
 
-
+              createFirebaseUser();
         }
     }
 
@@ -105,12 +119,37 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean isPasswordValid(String password) {
-
-        return true;
+        String confirmPassword = mConfirmPasswordView.getText().toString();
+        return  confirmPassword.equals(password) && password.length() > 4;
     }
 
 
 
+        public  void createFirebaseUser(){
+           String email = mEmailView.getText().toString();
+           String password = mPasswordView.getText().toString();
+           mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+               @Override
+               public void onComplete(@NonNull Task<AuthResult> task) {
+                   Log.d("DavChat","createUser onComplete " + task.isSuccessful());
+
+                   if (!task.isSuccessful()){
+                     Log.d("DavChat","User creation failed");
+                     showErrorDialog("Registration attempt failed");
+                   }
+               }
+           });
+        }
+
+        private void showErrorDialog(String message){
+
+             new AlertDialog.Builder(this)
+                     .setTitle("Oops")
+                     .setMessage(message)
+                     .setPositiveButton(android.R.string.ok,null)
+                     .setIcon(android.R.drawable.ic_dialog_alert)
+                     .show();
+        }
 
 
 

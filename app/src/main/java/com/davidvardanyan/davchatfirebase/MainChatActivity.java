@@ -15,6 +15,9 @@ public class MainChatActivity extends AppCompatActivity {
     private EditText mInputText;
     private ImageButton mSendButton;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
