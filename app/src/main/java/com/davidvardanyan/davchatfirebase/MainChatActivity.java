@@ -24,6 +24,7 @@ public class MainChatActivity extends AppCompatActivity {
     private EditText mInputText;
     private ImageButton mSendButton;
     private DatabaseReference mDatabaseReference;
+    private ChatListAdapter mAdapter;
 
 
 
@@ -89,14 +90,19 @@ public class MainChatActivity extends AppCompatActivity {
 
     }
 
-
+        @Override
+        public void onStart(){
+            super.onStart();
+            mAdapter = new ChatListAdapter(this,mDatabaseReference,mDisplayName);
+            mChatListView.setAdapter(mAdapter);
+        }
 
 
     @Override
     public void onStop() {
         super.onStop();
 
-
+         mAdapter.cleanup();
 
     }
 
